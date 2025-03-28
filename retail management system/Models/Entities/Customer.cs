@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace retail_management_system.Models.Entities
 {
     public class Customer
     {
         public int Id { get; set; }
+
+        public int CustomerId { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public required string CustomerName { get; set; }
         
         public string? Email { get; set; }
