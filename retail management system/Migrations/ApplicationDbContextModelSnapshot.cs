@@ -37,9 +37,13 @@ namespace retail_management_system.Migrations
                     b.Property<long>("CreditLimit")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -55,6 +59,9 @@ namespace retail_management_system.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerName")
+                        .IsUnique();
 
                     b.HasIndex("ShopId");
 
@@ -150,9 +157,13 @@ namespace retail_management_system.Migrations
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("ShopId")
                         .HasColumnType("int");
@@ -161,6 +172,9 @@ namespace retail_management_system.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductName")
+                        .IsUnique();
 
                     b.HasIndex("ShopId");
 

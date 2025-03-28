@@ -31,6 +31,15 @@ namespace retail_management_system.Data
                 .HasForeignKey(p => p.ShopId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            modelBuilder.Entity<Product>()
+                .HasIndex(p => p.ProductName)
+                .IsUnique();
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.CustomerName)
+                .IsUnique();
+
             modelBuilder.Entity<Customer>()
                 .HasOne(c => c.Shop)
                 .WithMany(s => s.Customers)
