@@ -34,6 +34,25 @@ namespace retail_management_system.Controllers
             return Ok(shopList);
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<Shop>> CreateShop(AddShopDto shopDto)
+        {
+            var shop = new Shop()
+            {
+                OwnerName = shopDto.OwnerName,
+                ShopName = shopDto.ShopName,
+                Phone = shopDto.Phone,
+                Email = shopDto.Email,
+                Address = shopDto.Address,
+                Username = shopDto.Username,
+                Password = shopDto.Password,
+                IsActive = shopDto.IsActive
+            }; 
+            dbContext.Shops.Add(shop);
+            await dbContext.SaveChangesAsync();
+
+            return Ok(shop);
+        }
 
 
         [HttpPost("login")]
@@ -69,7 +88,7 @@ namespace retail_management_system.Controllers
                     configuration["Jwt:Issuer"],
                     configuration["Jwt:Audience"],
                     claims,
-                    expires: DateTime.UtcNow.AddHours(6),
+                    expires: DateTime.UtcNow.AddDays(6),
                     signingCredentials: signin);
 
 
