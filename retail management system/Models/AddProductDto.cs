@@ -6,6 +6,6 @@
         public string? ProductDescription { get; set; }
         public string? ProductCategory { get; set; }
         public string? SupplierName { get; set; }
-        public required int ShopId { get; set; }
+     
     }
 }
