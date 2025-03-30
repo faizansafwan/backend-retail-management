@@ -20,6 +20,7 @@ namespace retail_management_system.Models.Entities
 
         public List<Product> Products { get; set; } = new();
         public List<Customer> Customers { get; set; } = new();
+        public List<Stock> Stocks { get; set; } = new();
 
     }
 
