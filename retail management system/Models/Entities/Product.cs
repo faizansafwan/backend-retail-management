@@ -1,11 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace retail_management_system.Models.Entities
 {
     public class Product
     {
         public int Id { get; set; } // primary key
+
+        [Required]
+     
         public int ProductId { get; set; }
 
         [Required]
@@ -20,6 +25,7 @@ namespace retail_management_system.Models.Entities
         public Shop? Shop { get; set; } // Navigation Property
 
 
+        [JsonIgnore]
         public List<Stock> Stocks { get; set; } = new();
         public List<InvoiceProduct> InvoiceProducts { get; set; } = new();
 
