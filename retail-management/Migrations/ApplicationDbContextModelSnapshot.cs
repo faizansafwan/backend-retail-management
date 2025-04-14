@@ -62,7 +62,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.Invoice", b =>
@@ -83,7 +83,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.InvoiceProduct", b =>
@@ -119,7 +119,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("InvoiceProducts");
+                    b.ToTable("InvoiceProducts", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.InvoiceStock", b =>
@@ -137,7 +137,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("InvoiceStocks");
+                    b.ToTable("InvoiceStocks", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.Product", b =>
@@ -172,7 +172,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.Shop", b =>
@@ -220,7 +220,7 @@ namespace retail_management.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shops");
+                    b.ToTable("Shops", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.Stock", b =>
@@ -261,7 +261,7 @@ namespace retail_management.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Stocks");
+                    b.ToTable("Stocks", (string)null);
                 });
 
             modelBuilder.Entity("retail_management.Models.Entities.Customer", b =>
