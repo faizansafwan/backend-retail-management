@@ -129,6 +129,39 @@ namespace retail_management.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("product-stock")]
+        public async Task<ActionResult<IEnumerable<Product>>> ProductWithStock()
+        {
+            var shopId = GetShopIdFromToken();
+
+            if (shopId == null)
+            {
+                return Unauthorized(new { Message = "Invalid Shop ID or Token" });
+            }
+
+            var productStock = await dbContext.Products.Where(p => p.ShopId == shopId)
+                .Select(product => new ProductWithStockDto
+                { 
+                    ProductId = product.Id,
+                    ProductName = product.ProductName,
+                    Category = product.ProductCategory,
+                    Supplier = product.SupplierName,
+                    CostPrice = product.Stocks.OrderByDescending(s => s.Id)
+                    .Select(s => (decimal)s.CostPrice).FirstOrDefault(),
+                    SellingPrice = product.Stocks.OrderByDescending(s => s.Id)
+                    .Select(s => (decimal)s.SellingPrice).FirstOrDefault(),
+                    TotalStock = product.Stocks.OrderByDescending(s => s.NewStock).Select(s => s.NewStock).FirstOrDefault(),
+                    Total = product.Stocks.OrderByDescending(s => s.Id).Select(s => s.Total).FirstOrDefault()
+                }).ToListAsync();
+
+            if (productStock.Count == 0)
+                return NotFound(new { message = "No products found for this shop" });
+
+            return Ok(productStock);
+        }
+
+
         [HttpPut("{id}")]
         public async Task<ActionResult<Product>> UpdateProduct(int id, Product UpdatedProduct)
         {
@@ -157,6 +190,9 @@ namespace retail_management.Controllers
                 return StatusCode(500, new { message = "Error updating product", error = ex.Message });
             }
         }
+
+
+
 
 
     }
