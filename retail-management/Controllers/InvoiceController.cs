@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using retail_management.Data;
 using retail_management.Models.Dto;
@@ -25,6 +26,7 @@ namespace retail_management.Controllers
         }
 
         // GET: api/Invoice
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
         {
@@ -48,6 +50,7 @@ namespace retail_management.Controllers
         }
 
         // GET: api/Invoice/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Invoice>> GetInvoice(int id)
         {
@@ -74,6 +77,7 @@ namespace retail_management.Controllers
 
 
         // POST: api/Invoice
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Invoice>> CreateInvoice(AddInvoiceDto invoiceDto)
         {
