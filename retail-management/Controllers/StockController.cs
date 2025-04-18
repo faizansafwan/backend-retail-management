@@ -160,5 +160,84 @@ namespace retail_management.Controllers
 
             return Ok(stock);
         }
+
+
+        [Authorize]
+        [HttpPost("bulk")]
+        public async Task<ActionResult> AddMultipleStock([FromBody] List<AddStockDto> stockDtos)
+        {
+            var shopId = GetShopIdFromToken();
+            if (shopId == null)
+            {
+                return Unauthorized(new { message = "Invalid Shop ID or Token" });
+            }
+
+            var createdStocks = new List<Stock>();
+
+            var groupedStockDtos = stockDtos
+                .GroupBy(s => s.ProductId)
+                .ToList();
+
+            foreach (var group in groupedStockDtos)
+            {
+                var productId = group.Key;
+                var product = await dbContext.Products
+                    .IgnoreQueryFilters()
+                    .FirstOrDefaultAsync(p => p.Id == productId && p.ShopId == shopId);
+
+                if (product == null)
+                {
+                    continue; // Skip invalid product
+                }
+
+                var existingStock = await dbContext.Stocks
+                    .FirstOrDefaultAsync(s => s.ProductId == productId && s.ShopId == shopId);
+
+
+
+                int currentStock = existingStock?.NewStock ?? 0;
+
+                foreach (var stockDto in group)
+                {
+                    int stockAdjustment = stockDto.StockAdjustment;
+                    
+
+                    if (existingStock != null)
+                    {
+                        existingStock.StockAdjustment = stockAdjustment;
+                        existingStock.CurrentStock = currentStock;
+                        existingStock.NewStock += stockAdjustment;
+                        existingStock.CostPrice = stockDto.CostPrice;
+                        existingStock.SellingPrice = stockDto.SellingPrice;
+                        existingStock.Total = stockAdjustment * stockDto.CostPrice;
+
+                        createdStocks.Add(existingStock);
+                    }
+                    else
+                    {
+                        var newStock = new Stock
+                        {
+                            ProductId = productId,
+                            CostPrice = stockDto.CostPrice,
+                            SellingPrice = stockDto.SellingPrice,
+                            StockAdjustment = stockAdjustment,
+                            CurrentStock = currentStock,
+                            NewStock = currentStock,
+                            ShopId = shopId.Value,
+                            Total = stockAdjustment * stockDto.CostPrice
+                        };
+
+                        dbContext.Stocks.Add(newStock);
+                        createdStocks.Add(newStock);
+
+                        existingStock = newStock;
+                    }
+                }
+            }
+
+            await dbContext.SaveChangesAsync();
+            return Ok(new { message = "Stocks processed successfully", stocks = createdStocks });
+        }
+
     }
 }
