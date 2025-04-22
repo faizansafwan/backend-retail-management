@@ -23,15 +23,8 @@ namespace retail_management.Models.Entities
         public decimal Discount { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public required decimal Total { get; set; }
-
-        [Column(TypeName = "decimal(18,2)")]
         public required decimal SubTotal { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Paid { get; set; }
-
-        [Column(TypeName = "decimal(18,2)")]
-        public required decimal Balance { get; set; }
+        
     }
 }
