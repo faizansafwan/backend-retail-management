@@ -28,16 +28,13 @@ namespace retail_management.Controllers
         // GET: api/Invoice
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
+        public async Task<ActionResult<IEnumerable<GetInvoiceDto>>> GetInvoices()
         {
-            // Get ShopId from token
             var shopId = GetShopIdFromToken();
             if (shopId == null)
-            {
                 return Unauthorized(new { message = "Invalid Shop ID or Token" });
-            }
 
-            var invoice =  await dbContext.Invoices
+            var invoices = await dbContext.Invoices
                 .Where(e => e.Customer.ShopId == shopId)
                 .Include(i => i.Customer)
                 .Include(i => i.InvoiceProducts)
@@ -46,22 +43,46 @@ namespace retail_management.Controllers
                     .ThenInclude(i => i.Stock)
                 .ToListAsync();
 
-            return Ok(invoice);
+            var result = invoices.Select(invoice => new GetInvoiceDto
+            {
+                Id = invoice.Id,
+                CustomerId = invoice.CustomerId,
+                CustomerName = invoice.Customer.CustomerName,
+                Total = invoice.Total,
+                Paid = invoice.Paid,
+                Balance = invoice.Balance,
+                InvoiceDate = invoice.InvoiceDate,
+                InvoiceProducts = invoice.InvoiceProducts.Select(ip => new GetInvoiceProductDto
+                {
+                    ProductId = ip.ProductId,
+                    ProductName = ip.Product.ProductName,
+                    Quantity = ip.Quantity,
+                    SellingPrice = ip.SellingPrice,
+                    Discount = ip.Discount,
+                    SubTotal = ip.SubTotal
+                }).ToList(),
+                InvoiceStocks = invoice.InvoiceStocks.Select(i => new GetInvoiceStockDto
+                {
+                    StockId = i.StockId,
+                    Quantity = i.Quantity
+                }).ToList()
+            });
+
+            return Ok(result);
         }
+
 
         // GET: api/Invoice/5
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Invoice>> GetInvoice(int id)
+        public async Task<ActionResult<GetInvoiceDto>> GetInvoice(int id)
         {
-            // Get ShopId from token
             var shopId = GetShopIdFromToken();
             if (shopId == null)
-            {
                 return Unauthorized(new { message = "Invalid Shop ID or Token" });
-            }
 
-            var invoice = await dbContext.Invoices.Where(e => e.Customer.ShopId == shopId)
+            var invoice = await dbContext.Invoices
+                .Where(e => e.Customer.ShopId == shopId)
                 .Include(i => i.Customer)
                 .Include(i => i.InvoiceProducts)
                     .ThenInclude(ip => ip.Product)
@@ -72,76 +93,107 @@ namespace retail_management.Controllers
             if (invoice == null)
                 return NotFound();
 
-            return invoice;
+            var result = new GetInvoiceDto
+            {
+                Id = invoice.Id,
+                CustomerId = invoice.CustomerId,
+                CustomerName = invoice.Customer.CustomerName,
+                Total = invoice.Total,
+                Paid = invoice.Paid,
+                Balance = invoice.Balance,
+                InvoiceDate = invoice.InvoiceDate,
+                InvoiceProducts = invoice.InvoiceProducts.Select(ip => new GetInvoiceProductDto
+                {
+                    ProductId = ip.ProductId,
+                    ProductName = ip.Product.ProductName,
+                    Quantity = ip.Quantity,
+                    SellingPrice = ip.SellingPrice,
+                    Discount = ip.Discount,
+                    SubTotal = ip.SubTotal
+                }).ToList(),
+                InvoiceStocks = invoice.InvoiceStocks.Select(i => new GetInvoiceStockDto
+                {
+                    StockId = i.StockId,
+                    Quantity = i.Quantity
+                }).ToList()
+            };
+
+            return Ok(result);
         }
+
 
 
         // POST: api/Invoice
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Invoice>> CreateInvoice(AddInvoiceDto invoiceDto)
+        public async Task<IActionResult> CreateInvoice([FromBody] AddInvoiceDto dto)
         {
             var shopId = GetShopIdFromToken();
             if (shopId == null)
-            {
-                return Unauthorized(new { message = "Invalid Shop ID or Token" });
-            }
+                return Unauthorized("Shop ID not found in token.");
 
-            // Validate Customer belongs to Shop
-            var customer = await dbContext.Customers.FindAsync(invoiceDto.CustomerId);
-            if (customer == null || customer.ShopId != shopId)
-            {
-                return BadRequest(new { message = "Invalid customer or customer does not belong to your shop" });
-            }
+            // Validate Customer
+            var customer = await dbContext.Customers
+                .FirstOrDefaultAsync(c => c.Id == dto.CustomerId && c.ShopId == shopId);
+            if (customer == null)
+                return NotFound($"Customer with ID {dto.CustomerId} not found for this shop.");
 
-            // Validate Products belong to Shop
-            foreach (var ip in invoiceDto.Products)
-            {
-                var product = await dbContext.Products.FindAsync(ip.ProductId);
-                if (product == null || product.ShopId != shopId)
-                {
-                    return BadRequest(new { message = $"Product {ip.ProductId} does not belong to your shop" });
-                }
-            }
+            decimal total = 0;
 
-            // Validate Stocks belong to Shop
-            foreach (var stock in invoiceDto.Stocks)
-            {
-                var stockEntity = await dbContext.Stocks.FindAsync(stock.StockId);
-                if (stockEntity == null || stockEntity.ShopId != shopId)
-                {
-                    return BadRequest(new { message = $"Stock {stock.StockId} does not belong to your shop" });
-                }
-            }
-
-            // Create Invoice entity
             var invoice = new Invoice
             {
-                CustomerId = invoiceDto.CustomerId,
-                InvoiceDate = DateTime.UtcNow,
-                InvoiceProducts = invoiceDto.Products.Select(p => new InvoiceProduct
-                {
-                    ProductId = p.ProductId,
-                    Quantity = p.Quantity,
-                    SellingPrice = p.SellingPrice,
-                    Discount = p.Discount,
-                    SubTotal = p.SubTotal,
-                    Total = p.Total,
-                    Paid = p.Paid,
-                    Balance = p.Balance
-                }).ToList(),
-
-                InvoiceStocks = invoiceDto.Stocks.Select(s => new InvoiceStock
-                {
-                    StockId = s.StockId,
-                    Quantity = s.Quantity
-                }).ToList()
+                CustomerId = dto.CustomerId,
+                Paid = dto.Paid,
+                InvoiceDate = dto.InvoiceDate,
             };
 
+            // InvoiceProducts
+            foreach (var item in dto.InvoiceProducts)
+            {
+                var product = await dbContext.Products
+                    .FirstOrDefaultAsync(p => p.Id == item.ProductId && p.ShopId == shopId);
+                if (product == null)
+                    return NotFound($"Product with ID {item.ProductId} not found for this shop.");
+
+                var subTotal = (item.Quantity * item.SellingPrice) - item.Discount;
+                total += subTotal;
+
+                invoice.InvoiceProducts.Add(new InvoiceProduct
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    SellingPrice = item.SellingPrice,
+                    Discount = item.Discount,
+                    SubTotal = subTotal
+                });
+            }
+
+            // InvoiceStocks
+            foreach (var item in dto.InvoiceStocks)
+            {
+                var stock = await dbContext.Stocks
+                    .FirstOrDefaultAsync(s => s.Id == item.StockId && s.ShopId == shopId);
+                if (stock == null)
+                    return NotFound($"Stock with ID {item.StockId} not found for this shop.");
+
+                invoice.InvoiceStocks.Add(new InvoiceStock
+                {
+                    StockId = item.StockId,
+                    Quantity = item.Quantity
+                });
+            }
+
+            // Final totals
+            invoice.Total = total;
+            invoice.Balance = total - dto.Paid;
+
+            // Save
             dbContext.Invoices.Add(invoice);
             await dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetInvoice), new { id = invoice.Id }, invoice);
         }
+
+
     }
 }

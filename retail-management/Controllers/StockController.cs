@@ -196,6 +196,7 @@ namespace retail_management.Controllers
 
 
                 int currentStock = existingStock?.NewStock ?? 0;
+                int currentTotalValue = (int)(existingStock?.Total ?? 0);
 
                 foreach (var stockDto in group)
                 {
@@ -209,7 +210,7 @@ namespace retail_management.Controllers
                         existingStock.NewStock += stockAdjustment;
                         existingStock.CostPrice = stockDto.CostPrice;
                         existingStock.SellingPrice = stockDto.SellingPrice;
-                        existingStock.Total = stockAdjustment * stockDto.CostPrice;
+                        existingStock.Total = (stockAdjustment * stockDto.CostPrice) + currentTotalValue ;
 
                         createdStocks.Add(existingStock);
                     }
@@ -222,7 +223,7 @@ namespace retail_management.Controllers
                             SellingPrice = stockDto.SellingPrice,
                             StockAdjustment = stockAdjustment,
                             CurrentStock = currentStock,
-                            NewStock = currentStock,
+                            NewStock = currentStock + stockAdjustment,
                             ShopId = shopId.Value,
                             Total = stockAdjustment * stockDto.CostPrice
                         };
