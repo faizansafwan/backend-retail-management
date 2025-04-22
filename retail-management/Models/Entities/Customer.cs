@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace retail_management.Models.Entities
 {
@@ -22,6 +23,8 @@ namespace retail_management.Models.Entities
         [ForeignKey("ShopId")]
 
         public Shop? Shop { get; set; }
+
+        [JsonIgnore]
         public ICollection<Invoice> Invoices { get; } = new List<Invoice>();
     }
 }
