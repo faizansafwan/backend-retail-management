@@ -63,8 +63,7 @@ namespace retail_management.Controllers
                 }).ToList(),
                 InvoiceStocks = invoice.InvoiceStocks.Select(i => new GetInvoiceStockDto
                 {
-                    StockId = i.StockId,
-                    Quantity = i.Quantity
+                    StockId = i.StockId
                 }).ToList()
             });
 
@@ -113,8 +112,7 @@ namespace retail_management.Controllers
                 }).ToList(),
                 InvoiceStocks = invoice.InvoiceStocks.Select(i => new GetInvoiceStockDto
                 {
-                    StockId = i.StockId,
-                    Quantity = i.Quantity
+                    StockId = i.StockId
                 }).ToList()
             };
 
@@ -132,14 +130,13 @@ namespace retail_management.Controllers
             if (shopId == null)
                 return Unauthorized("Shop ID not found in token.");
 
-            // Validate Customer
+            // Validate Customer and include tracking for update
             var customer = await dbContext.Customers
                 .FirstOrDefaultAsync(c => c.Id == dto.CustomerId && c.ShopId == shopId);
             if (customer == null)
                 return NotFound($"Customer with ID {dto.CustomerId} not found for this shop.");
 
             decimal total = 0;
-
             var invoice = new Invoice
             {
                 CustomerId = dto.CustomerId,
@@ -147,17 +144,37 @@ namespace retail_management.Controllers
                 InvoiceDate = dto.InvoiceDate,
             };
 
-            // InvoiceProducts
+            // Process products and automatically update stock
             foreach (var item in dto.InvoiceProducts)
             {
+                // Find product and its stock
                 var product = await dbContext.Products
+                    .Include(p => p.Stocks)
                     .FirstOrDefaultAsync(p => p.Id == item.ProductId && p.ShopId == shopId);
+
                 if (product == null)
                     return NotFound($"Product with ID {item.ProductId} not found for this shop.");
 
-                var subTotal = (item.Quantity * item.SellingPrice) - item.Discount;
+                // Get the stock record for this product in this shop
+                var stock = product.Stocks.FirstOrDefault(s => s.ShopId == shopId);
+                if (stock == null)
+                    return NotFound($"Stock record for Product ID {item.ProductId} not found.");
+
+                // Check stock availability
+                if (stock.NewStock < item.Quantity)
+                    return BadRequest($"Insufficient stock for {product.ProductName}. Available: {stock.NewStock}, Requested: {item.Quantity}");
+
+                // Update stock
+                stock.NewStock -= item.Quantity;
+                stock.StockAdjustment = -item.Quantity;
+                stock.Total = stock.NewStock * stock.CostPrice;
+                dbContext.Stocks.Update(stock);
+
+                // Calculate invoice line total
+                var subTotal = (item.Quantity * item.SellingPrice) - (item.Discount * item.Quantity);
                 total += subTotal;
 
+                // Add to invoice products
                 invoice.InvoiceProducts.Add(new InvoiceProduct
                 {
                     ProductId = item.ProductId,
@@ -168,28 +185,33 @@ namespace retail_management.Controllers
                 });
             }
 
-            // InvoiceStocks
-            foreach (var item in dto.InvoiceStocks)
-            {
-                var stock = await dbContext.Stocks
-                    .FirstOrDefaultAsync(s => s.Id == item.StockId && s.ShopId == shopId);
-                if (stock == null)
-                    return NotFound($"Stock with ID {item.StockId} not found for this shop.");
-
-                invoice.InvoiceStocks.Add(new InvoiceStock
-                {
-                    StockId = item.StockId,
-                    Quantity = item.Quantity
-                });
-            }
-
-            // Final totals
+            // Final invoice totals
             invoice.Total = total;
             invoice.Balance = total - dto.Paid;
 
-            // Save
-            dbContext.Invoices.Add(invoice);
-            await dbContext.SaveChangesAsync();
+            // Update customer's opening balance with the remaining balance
+            // If balance is positive (customer owes money), add to opening balance
+            // If balance is negative (customer overpaid), subtract from opening balance
+            customer.OpeningBalance += (long) invoice.Balance;
+
+            // Save changes in transaction
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                // Update customer record
+                dbContext.Customers.Update(customer);
+
+                // Add invoice
+                dbContext.Invoices.Add(invoice);
+
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                return StatusCode(500, $"An error occurred while creating the invoice: {ex.Message}");
+            }
 
             return CreatedAtAction(nameof(GetInvoice), new { id = invoice.Id }, invoice);
         }
