@@ -14,6 +14,5 @@ namespace retail_management.Models.Entities
         [ForeignKey("StockId")]
         public Stock Stock { get; set; } = null!;
 
-        public int Quantity { get; set; }
     }
 }
