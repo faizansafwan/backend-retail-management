@@ -3,36 +3,28 @@
   "WorkspaceRootPath": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\dto\\invoicestockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\dto\\invoicestockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\dto\\addinvoicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\dto\\addinvoicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\entities\\stock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\entities\\stock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\dto\\invoiceproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\dto\\invoiceproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\models\\entities\\invoiceproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\models\\entities\\invoiceproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|d:\\enterprise project\\project retail management\\backend\\retail-management\\retail-management\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A623CB-FEE3-4767-BD3E-94598629DD44}|retail-management\\retail-management.csproj|solutionrelative:retail-management\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,84 +34,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Program.cs",
-              "RelativeDocumentMoniker": "retail-management\\Program.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Program.cs",
-              "RelativeToolTip": "retail-management\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAABuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T18:05:20.727Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AddInvoiceDto.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\AddInvoiceDto.cs",
-              "RelativeDocumentMoniker": "retail-management\\Models\\Dto\\AddInvoiceDto.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\AddInvoiceDto.cs",
-              "RelativeToolTip": "retail-management\\Models\\Dto\\AddInvoiceDto.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAAAUAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:51:00.414Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "InvoiceStockDto.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\InvoiceStockDto.cs",
-              "RelativeDocumentMoniker": "retail-management\\Models\\Dto\\InvoiceStockDto.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\InvoiceStockDto.cs",
-              "RelativeToolTip": "retail-management\\Models\\Dto\\InvoiceStockDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAoAAAA",
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "retail-management\\Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "retail-management\\Controllers\\CustomerController.cs",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAswGsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:50:35.785Z",
+              "WhenOpened": "2025-04-23T11:27:30.679Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "InvoiceProductDto.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\InvoiceProductDto.cs",
-              "RelativeDocumentMoniker": "retail-management\\Models\\Dto\\InvoiceProductDto.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Dto\\InvoiceProductDto.cs",
-              "RelativeToolTip": "retail-management\\Models\\Dto\\InvoiceProductDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAtAAAA",
+              "DocumentIndex": 2,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Customer.cs",
+              "RelativeDocumentMoniker": "retail-management\\Models\\Entities\\Customer.cs",
+              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Customer.cs",
+              "RelativeToolTip": "retail-management\\Models\\Entities\\Customer.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAzwB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:50:12.811Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InvoiceProduct.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\InvoiceProduct.cs",
-              "RelativeDocumentMoniker": "retail-management\\Models\\Entities\\InvoiceProduct.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\InvoiceProduct.cs",
-              "RelativeToolTip": "retail-management\\Models\\Entities\\InvoiceProduct.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAwB4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:33:06.259Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "retail-management\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "retail-management\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAowFsAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:26:48.111Z",
+              "WhenOpened": "2025-04-23T09:27:32.488Z",
               "EditorCaption": ""
             },
             {
@@ -130,20 +70,46 @@
               "RelativeDocumentMoniker": "retail-management\\Controllers\\InvoiceController.cs",
               "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Controllers\\InvoiceController.cs",
               "RelativeToolTip": "retail-management\\Controllers\\InvoiceController.cs",
-              "ViewState": "AQIAAHkAAAAAAAAAAAAUwMIAAAAJAAAA",
+              "ViewState": "AQIAAMsAAAAAAAAAAAAqwN0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T17:48:56.394Z",
+              "WhenOpened": "2025-04-23T08:58:06.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "Stock.cs",
+              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Stock.cs",
+              "RelativeDocumentMoniker": "retail-management\\Models\\Entities\\Stock.cs",
+              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Stock.cs",
+              "RelativeToolTip": "retail-management\\Models\\Entities\\Stock.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-23T09:00:11.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "retail-management\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "retail-management\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAALUAAAAAAAAAAAAqwMcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-23T06:16:54.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Invoice.cs",
               "DocumentMoniker": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Invoice.cs",
               "RelativeDocumentMoniker": "retail-management\\Models\\Entities\\Invoice.cs",
               "ToolTip": "D:\\Enterprise Project\\Project retail management\\Backend\\retail-management\\retail-management\\Models\\Entities\\Invoice.cs",
               "RelativeToolTip": "retail-management\\Models\\Entities\\Invoice.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAIwBsAAAAAAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAcwBsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T17:48:30.563Z",
               "EditorCaption": ""
