@@ -1,0 +1,34 @@
+name: Backend CI
+
+on:
+    push:
+        paths:
+            - 'retail-management/**'
+
+    pull_request:
+        paths:
+            - 'retail-management/**'
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup .Net
+              uses: actions/setup-dotnet@v3
+              with:
+                dotnet-version: '8.0.x'
+
+            - name: Restore Dependencies
+              run: dotnet restore ./retail-management/retail_management.csproj
+
+            - name: Build
+              run: dotnet build ./retail-management/retail_management.csproj --no-restore --configuration Release
+
+            - name: Run Tests
+              run: dotnet test ./retail-management/retail_management.csproj --no-build --verbosity normal
+            
+
