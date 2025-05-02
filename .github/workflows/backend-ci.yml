@@ -3,7 +3,9 @@ name: Backend CI
 on:
     push:
         paths:
-            - 'retail-management/**'
+            - '**.cs'
+            - '**.csproj'
+            - '**.sln'
 
     pull_request:
         paths:
