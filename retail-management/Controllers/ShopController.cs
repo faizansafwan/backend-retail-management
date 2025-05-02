@@ -164,5 +164,32 @@ namespace retail_management.Controllers
                    return StatusCode(500, new { message = "Error deleting shop", error = ex.Message });
                }
            }
+
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<ActionResult<Shop>> GetMyShop()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity == null)
+                return Unauthorized("No identity found");
+
+            var shopIdClaim = identity.FindFirst("Id");
+
+            if (shopIdClaim == null)
+                return Unauthorized("Shop ID not found in token");
+
+            if (!int.TryParse(shopIdClaim.Value, out int shopId))
+                return Unauthorized("Invalid Shop ID");
+
+            var shop = await dbContext.Shops.FindAsync(shopId);
+
+            if (shop == null)
+                return NotFound("Shop not found");
+
+            return Ok(shop);
+        }
+
     }
 }
