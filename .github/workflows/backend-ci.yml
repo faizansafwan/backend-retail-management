@@ -2,14 +2,11 @@ name: Backend CI
 
 on:
     push:
-        paths:
-            - '**.cs'
-            - '**.csproj'
-            - '**.sln'
-
+      paths:
+        - 'retail-management/**'
     pull_request:
-        paths:
-            - 'retail-management/**'
+      paths:
+        - 'retail-management/**'
 
 jobs:
     build-and-test:
