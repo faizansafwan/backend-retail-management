@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: retail_api
+    depends_on:
+      - sqlserver
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    volumes:
+      - datakeys:/app/keys
+
+volumes:
+  sqlserverdata:
+  datakeys:

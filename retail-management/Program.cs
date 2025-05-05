@@ -24,7 +24,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(jwtKey))
-    throw new Exception("JWT Key is missing in configuration");
+{
+    builder.Logging.AddConsole();
+    builder.Logging.AddDebug();
+    Console.WriteLine("WARNING: JWT key is not configured. Authentication may fail.");
+}
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -70,6 +75,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+// Apply EF Core Migrations
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate(); // applies pending migrations automatically
+}
+
 
 // Disable HTTPS redirection (Render handles HTTPS)
 app.UseCors("AllowFrontend");
