@@ -5,7 +5,15 @@ using Microsoft.IdentityModel.Tokens;
 using retail_management.Data;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    EnvironmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
+});
+
+builder.Configuration
+    .AddEnvironmentVariables(); // <--- This ensures environment variables like ConnectionStrings__DefaultConnection are loaded
+
 
 // Add services to the container.
 builder.Services.AddControllers()
