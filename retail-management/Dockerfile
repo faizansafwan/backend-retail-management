@@ -11,6 +11,7 @@ WORKDIR /src
 
 # Copy csproj and restore
 COPY ["retail-management/retail-management.csproj", "retail-management/"]
+RUN dotnet add "retail-management/retail-management.csproj" package DotNetEnv
 RUN dotnet restore "retail-management/retail-management.csproj"
 
 # Copy and build
