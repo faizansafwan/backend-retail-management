@@ -174,3 +174,5 @@ D:\Enterprise Project\Project retail management\Backend\retail-management\retail
 D:\Enterprise Project\Project retail management\Backend\retail-management\retail-management\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Enterprise Project\Project retail management\Backend\retail-management\retail-management\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Enterprise Project\Project retail management\Backend\retail-management\retail-management\obj\Debug\net8.0\retail-management.sourcelink.json
+D:\Enterprise Project\Project retail management\Backend\retail-management\retail-management\bin\Debug\net8.0\DotNetEnv.dll
+D:\Enterprise Project\Project retail management\Backend\retail-management\retail-management\bin\Debug\net8.0\Sprache.dll
