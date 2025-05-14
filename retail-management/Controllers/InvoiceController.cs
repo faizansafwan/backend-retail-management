@@ -217,5 +217,31 @@ namespace retail_management.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("rfm-data")]
+        public async Task<ActionResult<IEnumerable<CustomerRfmDto>>> GetCustomerRfmData()
+        {
+            var shopId = GetShopIdFromToken();
+            if (shopId == null)
+                return Unauthorized("Invalid shop token.");
+
+            var rfmData = await dbContext.Invoices
+                .Where(i => i.Customer.ShopId == shopId)
+                .GroupBy(i => new { i.CustomerId, i.Customer.CustomerName })
+                .Select(g => new CustomerRfmDto
+                {
+                    CustomerId = g.Key.CustomerId,
+                    CustomerName = g.Key.CustomerName,
+                    LastInvoiceDate = g.Max(i => i.InvoiceDate),
+                    InvoiceCount = g.Count(),
+                    TotalSpent = g.Sum(i => i.Total)
+                })
+                .ToListAsync();
+
+            return Ok(rfmData);
+        }
+
+
+
     }
 }
